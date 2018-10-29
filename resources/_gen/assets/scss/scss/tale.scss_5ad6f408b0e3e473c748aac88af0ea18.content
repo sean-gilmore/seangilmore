@@ -436,6 +436,9 @@ footer,
     color: #555;
     font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif; }
 
+.header-nav__link {
+  user-select: none; }
+
 @media (min-width: 600px) {
   .nav-container {
     text-align: left; }
@@ -513,5 +516,12 @@ footer {
   border-top: 0.2rem solid #353535;
   display: block;
   width: 2rem; }
+
+.catalogue-item__section-link {
+  color: #fff;
+  background-color: green;
+  border-radius: 3px;
+  padding: 3px 9px;
+  display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */

@@ -66,6 +66,10 @@ footer,
   }
 }
 
+.header-nav__link {
+  user-select: none;
+}
+
 @media (min-width: 600px) {
   .nav {
     &-container {
