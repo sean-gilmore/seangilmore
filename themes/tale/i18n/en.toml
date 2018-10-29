@@ -1,0 +1,17 @@
+[posts]
+other = "Posts"
+
+[about]
+other = "About"
+
+[writtenBy]
+other = "Written by"
+
+[on]
+other = "on"
+
+[generator]
+other = ""
+
+[publishdate]
+other = "{{ .PublishDate.Format \"January 2, 2006\" }}"

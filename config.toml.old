@@ -1,0 +1,6 @@
+baseURL = "//seangilmore.xyz"
+languageCode = "en-us"
+title = "Sean Gilmore"
+theme = "tale"
+author = "Sean Gilmore"
+params
