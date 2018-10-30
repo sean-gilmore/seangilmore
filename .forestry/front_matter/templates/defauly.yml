@@ -1,0 +1,19 @@
+---
+label: Defauly
+hide_body: false
+is_partial: false
+fields:
+- type: text
+  name: title
+  label: Title
+- type: datetime
+  name: date
+  label: date
+  config:
+    date_format: YYYY/MM/DD
+    required: true
+- type: boolean
+  label: Draft
+  name: draft
+pages:
+- content/programming/rails-getting-started-with-ajax-forms.md
