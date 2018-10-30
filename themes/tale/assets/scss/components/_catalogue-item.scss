@@ -1,7 +1,15 @@
 .catalogue-item__section-link {
   color: $white;
-  background-color: green;
+  background-color: $green;
   border-radius: 3px;
   padding: 3px 9px;
   display: inline-block;
+}
+
+.catalogue-item__section-link--blog {
+  background-color: $blue;
+}
+
+.catalogue-item__section-link--programming {
+  background-color: $red;
 }

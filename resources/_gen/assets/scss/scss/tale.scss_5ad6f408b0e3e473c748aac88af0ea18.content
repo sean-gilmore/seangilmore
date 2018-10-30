@@ -135,6 +135,12 @@ pre code {
     padding: 0;
     margin: 0; }
 
+.post-title {
+  text-align: left; }
+
+.post-line {
+  margin: 0 auto 3rem 0; }
+
 .highlight .hll {
   background-color: #ffc; }
 
@@ -519,9 +525,18 @@ footer {
 
 .catalogue-item__section-link {
   color: #fff;
-  background-color: green;
+  background-color: #58d83e;
   border-radius: 3px;
   padding: 3px 9px;
   display: inline-block; }
+
+.catalogue-item__section-link--blog {
+  background-color: #4a9ae1; }
+
+.catalogue-item__section-link--programming {
+  background-color: #d83a29; }
+
+.nav-title:hover {
+  opacity: 1 !important; }
 
 /*# sourceMappingURL=style.css.map */

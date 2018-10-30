@@ -1,4 +1,5 @@
 <ul class="header-nav">
-    <li class="header-nav__link"><a href="{{ "about" | relURL }}">{{ i18n "about" }}</a></li>
-    <li class="header-nav__link"><a href="{{ "/" | relURL }}">{{ i18n "posts" }}</a></li>
+    {{ range .Site.Sections }}
+      <li class="header-nav__link"><a href="{{ .Permalink }}">{{ .Title | singularize }}</a></li>
+    {{ end }}
 </ul>
