@@ -9,5 +9,11 @@ fields:
 - type: boolean
   label: Draft
   name: draft
+- type: datetime
+  name: date
+  label: date
+  config:
+    date_format: YYYY/MM/DD
+    required: true
 pages:
 - content/programming/rails-getting-started-with-ajax-forms.md
