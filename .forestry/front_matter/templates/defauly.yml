@@ -6,5 +6,8 @@ fields:
 - type: text
   name: title
   label: Title
+- type: boolean
+  label: Draft
+  name: draft
 pages:
 - content/programming/rails-getting-started-with-ajax-forms.md
