@@ -4,3 +4,4 @@ draft = true
 title = "Rails: Getting started with Ajax forms"
 
 +++
+This is a test of a new document in programming.
