@@ -3,3 +3,5 @@ label: Defauly
 hide_body: false
 is_partial: false
 fields: []
+pages:
+- content/programming/rails-getting-started-with-ajax-forms.md
