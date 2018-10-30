@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>//seangilmore.xyz/about/</loc>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/programming/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/programming/rails-ajax-form-submission/</loc>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+</urlset>
