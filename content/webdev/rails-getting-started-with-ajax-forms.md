@@ -2,7 +2,6 @@
 date = "2018-10-30T17:16:45+00:00"
 draft = true
 title = "Rails: Getting started with Ajax forms"
-
 +++
 
 Rails Ajax form submission is a topic that is widely covered, but I'm yet to find a resource that deals with how to set up a completely custom implementation, from form submission to controller action, through to returning some response via Javascript and updating the page view dynamically.
@@ -11,7 +10,7 @@ When I was learning about ajax form submission, I put together this document to 
 
 I hope you too can get some use from it.
 
-<!-- read more -->
+<!--more-->
 
 Heres the gist:
 
@@ -56,11 +55,11 @@ An example is shown below:
 
     if is_a_valid_email?(email) && email == email_confirmation
       @message = 'success'
-      ActiveCampaignHandraiserJob.perform_later(email, first_name, last_name)
+      HandraiserJob.perform_later(email, first_name, last_name) # Don't worry about this, this is what I was doing with successful submissions!
     elsif email != email_confirmation
-      @message = 'nomatch'
+      @message = 'nomatch' # email + confirmation email did not match
     elsif !is_a_valid_email?(email)
-      @message = 'invalid'
+      @message = 'invalid' # using a custom email validation method I determined that the submitted email is invalid!
     end
   end
 ```

@@ -8,6 +8,8 @@ Hello World! This is the first blog on my new website.
 
 This site it built using [Hugo](https://gohugo.io/) the static site generator, using a modified version of the [Tale](https://github.com/EmielH/tale-hugo) theme.
 
+<!--more--> 
+
 <figure>
   <img src="hugo.svg"  />
   <figcaption>
@@ -17,7 +19,6 @@ This site it built using [Hugo](https://gohugo.io/) the static site generator, u
       </p>
   </figcaption>
 </figure>
-<!--more--> 
 
 I chose to make this site using a static site generator based on a couple of factors:
 

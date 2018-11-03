@@ -531,7 +531,7 @@ footer {
 .catalogue-item__section-link--blog {
   background-color: #4a9ae1; }
 
-.catalogue-item__section-link--programming {
+.catalogue-item__section-link--webdev {
   background-color: #d83a29; }
 
 .catalogue-item {
