@@ -1,7 +1,7 @@
 ---
 title: "Hello World"
 date: 2018-10-29T04:49:54+11:00
-draft: true
+draft: false
 ---
 
 Hello World! This is the first blog on my new website.

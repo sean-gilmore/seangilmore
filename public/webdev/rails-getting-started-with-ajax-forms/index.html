@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+		<title>
+				Rails: Getting started with Ajax forms &middot; Sean Gilmore
+		</title>
+	
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+	
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="//seangilmore.xyzimages/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="//seangilmore.xyzimages/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="//seangilmore.xyzimages/apple-touch-icon.png">
+		<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sean Gilmore" />
+	</head>
+	
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sean Gilmore</h2>
+				</a>
+				<ul class="header-nav">
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/about/">About</a></li>
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/blog/">Blog</a></li>
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/webdev/">Webdev</a></li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+        <br>
+        <time datetime="2018-10-30 17:16:45 &#43;0000 &#43;0000">October 30, 2018</time>
+</div>
+		<h1 class="post-title">Rails: Getting started with Ajax forms</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>Rails Ajax form submission is a topic that is widely covered, but I&rsquo;m yet to find a resource that deals with how to set up a completely custom implementation, from form submission to controller action, through to returning some response via Javascript and updating the page view dynamically.</p>
+
+<p>When I was learning about ajax form submission, I put together this document to help myself in the future. The problem I was working on at the time was to create a &lsquo;hand raisers&rsquo; form that would submit and update with a response from the server if the submission had been successful, or if it had issues.</p>
+
+<p>I hope you too can get some use from it.</p>
+
+<p></p>
+
+<p>Heres the gist:</p>
+
+<h2 id="remote-true">Remote: true</h2>
+
+<p><code>remote: true</code> and <code>method: :post</code> should be added to your form.
+Adding this <code>remote: true</code> settings will tell ruby to submit the form via ajax, and render the associated methods js file in response to the request.</p>
+
+<pre><code class="language-html"> &lt;%= form_tag form_path, method: :post, remote: true, class: 'contact-form', id: 'contact-form' do %&gt;
+  ...
+ &lt;% end %&gt;
+ &lt;div id=&quot;handraisers__response-title&quot;&gt;&lt;/div&gt;
+ &lt;div id=&quot;handraisers__response-text&quot;&gt;&lt;/div&gt;
+</code></pre>
+
+<h2 id="adding-a-form-route">Adding a form route</h2>
+
+<p>A route must be added to your <code>routes.rb</code> file. This tells that the path the form is submitting to calls this controller action. All form parameters can be accessed in the standard <code>param[:field_name]</code> manner.</p>
+
+<pre><code class="language-Ruby">post 'form_path', to: 'controller_name#action_name'
+</code></pre>
+
+<h2 id="adding-an-action">Adding an action</h2>
+
+<p>You must have a controller and action that matches those specified in your <code>routes.rb</code> file.</p>
+
+<p>The code inside of this action is what will be called once the form is submitted.</p>
+
+<p>You should have all form validation and logic here.</p>
+
+<p>Variables that you wish to access later should be set here, using the <code>@variable_name</code> syntax.</p>
+
+<p>An example is shown below:</p>
+
+<pre><code class="language-Ruby">  def handraiser
+    first_name = params[:first_name] # you can access params just like normal
+    last_name = params[:last_name]
+    email = params[:email]
+    email_confirmation = params[:email_confirmation]
+
+    if is_a_valid_email?(email) &amp;&amp; email == email_confirmation
+      @message = 'success'
+      HandraiserJob.perform_later(email, first_name, last_name) # Don't worry about this, this is what I was doing with successful submissions!
+    elsif email != email_confirmation
+      @message = 'nomatch' # email + confirmation email did not match
+    elsif !is_a_valid_email?(email)
+      @message = 'invalid' # using a custom email validation method I determined that the submitted email is invalid!
+    end
+  end
+</code></pre>
+
+<h2 id="updating-the-view">Updating the view</h2>
+
+<p>By default rails will fire the associated <code>action_name.js.erb</code> file for all <code>remote: true</code> form submissions.</p>
+
+<p>It&rsquo;s here that we can update the view and access our previously set <code>@message</code> variable. Make sure this goes in the <code>action_name.js.erb</code> file!</p>
+
+<p>Below is an example of handling the response of the the forms ajax request:</p>
+
+<pre><code class="language-javascript">$(document).ready(function(){
+  var message = &quot;&lt;%= escape_javascript(@message) %&gt;&quot;;
+  var responseTitle = '';
+  var responseText = '';
+  $('#contact-form').on(&quot;ajax:success&quot;, function(e, data, status, xhr){
+    if (message == 'success') {
+      responseTitle = 'Thank you for contacting us';
+      responseText = 'Check your inbox for your first free email.';
+    } else if (message == 'invalid') {
+      responseTitle = 'The email you submitted is invalid';
+      responseText = 'Please Update your email address and resubmit the form.';
+    } else if (message == 'nomatch') {
+      responseTitle = 'Your email did not match!';
+      responseText = 'Please Update your email address and resubmit the form.';
+    } else {
+      responseTitle = 'There was an error submitting your form';
+      responseText = 'Please try again later.';
+    }
+    $('#handraisers__response-title').text(responseTitle);
+    $('#handraisers__response-text').text(responseText);
+  }).on(&quot;ajax:error&quot;, function(e, data, status, xhr){
+    $('#handraisers__response-title').text('There was an error submitting your form');
+    $('#handraisers__response-text').text('Please try again later.');
+  });
+
+});
+</code></pre>
+
+<p>Make sure you take specific care with the <code>var message = &quot;&lt;%= escape_javascript(@message) %&gt;&quot;;</code> line, as you can run into really annoying situations where Rails doesn&rsquo;t like outputting the content, or JavaScript doesn&rsquo;t like reading the outputted content. Use double quotes and the <code>escape_javascript</code> helper to get the right result.</p>
+
+<h2 id="debugging">Debugging</h2>
+
+<p>I&rsquo;ve found that the easiest way to debug ajax form submissions is to use the network tab of Chrome dev tools. You should have this tab open with testing your ajax form submission and be listening out for the response. If the response output in this tab doesn&rsquo;t match your expected output, you&rsquo;ve got a problem.</p>
+
+<p>I also recommend using <a href="https://github.com/deivid-rodriguez/byebug">byebug</a> and chucking a debugging statement in your controller action to ensure your program is reaching that point.</p>
+
+<p>Otherwise, good luck!</p>
+
+<p>Let me know if I&rsquo;ve missed anything or have any issues in my code so that I can update this post for future visitors.</p>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/blog/hello-world/" class="left arrow">&#8592; Previous</a>
+
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2018-11-03 22:54:48.741839 &#43;0100 CET m=&#43;0.076172330">2018</time> Sean Gilmore
+			</span>
+		</footer>
+
+    </body>
+</html>

@@ -3,7 +3,23 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//seangilmore.xyz/webdev/rails-getting-started-with-ajax-forms/</loc>
+    <lastmod>2018-10-30T17:16:45+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/blog/hello-world/</loc>
+    <lastmod>2018-10-29T04:49:54+11:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//seangilmore.xyz/about/</loc>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/blog/</loc>
+    <lastmod>2018-10-29T04:49:54+11:00</lastmod>
+    <priority>0</priority>
   </url>
   
   <url>
@@ -13,11 +29,18 @@
   
   <url>
     <loc>//seangilmore.xyz/</loc>
+    <lastmod>2018-10-30T17:16:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>//seangilmore.xyz/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//seangilmore.xyz/webdev/</loc>
+    <lastmod>2018-10-30T17:16:45+00:00</lastmod>
     <priority>0</priority>
   </url>
   
