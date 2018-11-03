@@ -1,6 +1,6 @@
 <div class="catalogue-item">
     <div>
-        <a class="catalogue-item__section-link catalogue-item__section-link--{{ .Section }}" href="{{.Section}}">{{ .Section | title }}</a>
+        <a class="catalogue-item__section-link catalogue-item__section-link--{{ .Section }}" href="/{{.Section}}">{{ .Section | title }}</a>
         <time datetime="{{ .PublishDate }}" class="catalogue-time">{{ i18n "publishdate" . }}</time>
         <h1 class="catalogue-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h1>
         <div class="catalogue-line"></div>

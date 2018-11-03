@@ -534,6 +534,9 @@ footer {
 .catalogue-item__section-link--programming {
   background-color: #d83a29; }
 
+.catalogue-item {
+  display: block !important; }
+
 .nav-title:hover {
   opacity: 1 !important; }
 
