@@ -11,11 +11,10 @@ This site it built using [Hugo](https://gohugo.io/) the static site generator, u
 <!--more--> 
 
 <figure>
-  <img src="hugo.svg"  />
+  <img src="/blog/hello-world/hugo.svg"  />
   <figcaption>
       <p>
-        The amazing svg based hugo logo.<br>
-        <small>Source: [https://gohugo.io/](https://gohugo.io/)</small>
+        <a href="https://gohugo.io" target="_blank">The amazing svg based hugo logo (Source: GoHugo)</a>
       </p>
   </figcaption>
 </figure>
