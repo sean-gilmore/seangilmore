@@ -15,20 +15,18 @@ This article deals with what I want my development environment to look like, and
 
 There's several features I want from my development environment:
 
-- Consistency: I want my development environment to stay the same across development machines (Home PC, Work PC, Laptop). Furthermore it shouldn't change depending on the operating system I'm running.
-- Ease of setup: Ideally I only want to have to run a couple of commands on a new computer to get my environment up and running
-- Multi-project: I want to be able to access all of my projects via local virtual host domains (i.e. my-project-1.test, my-project-2.test)
-- Project-to-project PHP/Apache/NGINX version control: I want to be able to run php 5.6 for an old legacy project (while I move it to a new version - [5.6 has hit EOL](http://php.net/supported-versions.php)), and php 7.3 for all of my new projects.
+- Consistency: I want my development environment to stay the same across machines (Home PC, Work PC, Laptop). Furthermore it shouldn't change depending on the operating system I'm running.
+- Ease of setup: Ideally I only want to have to run a couple of commands on a new computer to get my environment up and running.
+- Multi-project: I want to be able to access all of my projects via local virtual host domains (i.e. my-project-1.test, my-project-2.test).
+- Project-to-project PHP/Apache/NGINX version control: I want to be able to run PHP 5.6 for an old legacy project (while I move it to a new version - [5.6 has hit EOL](http://php.net/supported-versions.php)), and PHP 7.x for all of my new projects.
 
-Having all these features in one development environment is a tall order when considering traditional options like running apache or XAMPP, but by using docker we can achieve all this (and more).
+Having all these features in one development environment is a tall order when considering traditional options like running apache or XAMPP, but by using Docker we can achieve all this (and more).
 
 ## What we'll need
 
-1. Docker and docker-compose installed
-2. A WordPress project
-3. Your favourite editor of choice
-
-Once we have all of that setup we can move on to setting up WordPress to work via docker, giving our project a virtual host name, and making sure we can visit it via that hostname in the browser.
+1. [Docker](https://www.docker.com/get-started)
+2. [docker-compose](https://docs.docker.com/compose/)
+3. A WordPress project
 
 ## Setting up JWilder's nginx-proxy
 
@@ -46,7 +44,7 @@ $ docker ps
 
 If the above command was successful, we should see `nginx-proxy` listed in the output. Please note that you should ensure you have nginx or apache services stopped on your machine for the nginx-proxy to work correctly.
 
-With our nginx-proxy running successfully we can move on to running our WordPress project through docker and giving it a virtual host name.
+With our nginx-proxy running successfully we can move on to running our WordPress project through Docker and giving it a virtual host name.
 
 ## Running WordPress with Docker
 
