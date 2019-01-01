@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+		<title>
+				WordPress with Docker and nginx-proxy &middot; Sean Gilmore
+		</title>
+	
+		
+  		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+	
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="//seangilmore.xyzimages/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="//seangilmore.xyzimages/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="//seangilmore.xyzimages/apple-touch-icon.png">
+		<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+	
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sean Gilmore" />
+	</head>
+	
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sean Gilmore</h2>
+				</a>
+				<ul class="header-nav">
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/about/">About</a></li>
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/blog/">Blog</a></li>
+    
+      <li class="header-nav__link"><a href="//seangilmore.xyz/webdev/">Webdev</a></li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+        <br>
+        <time datetime="2018-12-30 10:41:05 &#43;1100 AEDT">December 30, 2018</time>
+</div>
+		<h1 class="post-title">WordPress with Docker and nginx-proxy</h1>
+<div class="post-line"></div>
+
+		
+
+		
+
+<p>This article assumes you&rsquo;re at least slightly familiar with Docker and Docker Compose. If you&rsquo;re not sure of what Docker is, or you&rsquo;d like to get started with Docker, I would check out the following links.</p>
+
+<ul>
+<li><a href="https://www.docker.com/why-docker">Why Docker?</a></li>
+<li><a href="https://www.docker.com/get-started">Get Started with Docker</a></li>
+</ul>
+
+<p>I am by no way a Docker expert, so if you see something in this article that you disagree with or you think could be improved upon, feel free to shoot me a tweet at <a href="https://twitter.com/_sean_gilmore">@_sean_gilmore</a>.</p>
+
+<p>With that said, lets dive into exactly what I want to get out of my development environment when working on WordPress projects.</p>
+
+<h2 id="my-desired-development-environment">My desired development environment</h2>
+
+<p>There&rsquo;s several features I want from my development environment:</p>
+
+<ul>
+<li>Consistency: I want my environment set up to be consistent between machines. to thermore it shouldn&rsquo;t change depending on the operating system I&rsquo;m running.</li>
+<li>Ease of setup: I only want to run a couple of commands on a new computer to be up and running.</li>
+<li>Multi-project: I want to access all of my projects via local virtual host domains (i.e. my-project-1.test, my-project-2.test).</li>
+<li>Software version control (PHP, mysql, apache): I want to be able to run PHP 5.6 for an old legacy project (while I move it to a new version - <a href="http://php.net/supported-versions.php">5.6 has hit EOL</a>), and PHP 7.x for all of my new projects.</li>
+</ul>
+
+<p>Having all these features in one development environment is a tall order when considering traditional options like running apache or XAMPP. Fortunately for us this is where Docker comes in - bringing with it the ability to run all of our projects in containers, a command line tool that&rsquo;s easy to get started with, and the ability to managing configs on a per project basis. Combined with a proxy service we can achieve all our listed objectives and more!</p>
+
+<h2 id="prerequisites">Prerequisites</h2>
+
+<ol>
+<li><a href="https://www.docker.com/get-started">Docker</a> installed.</li>
+<li><a href="https://docs.docker.com/compose/">docker-compose</a> installed.</li>
+<li>A WordPress project.</li>
+</ol>
+
+<h2 id="setting-up-jwilder-s-nginx-proxy">Setting up JWilder&rsquo;s nginx-proxy</h2>
+
+<p>JWilders nginx-proxy is a super useful Docker container that will enable us to run all our projects under their own virtual host names. The command to get the nginx-proxy up and running is as follows:</p>
+
+<pre><code class="language-shell">$ docker run -d -p 80:80 -v /var/run/docker.sock:/tmp/docker.sock:ro jwilder/nginx-proxy
+</code></pre>
+
+<p>To confirm that the nginx-proxy is running successfully, we can run the following command to list out all the currently running containers:</p>
+
+<pre><code class="language-shell">$ docker ps
+</code></pre>
+
+<p>If successful, we should see <code>nginx-proxy</code> listed in our terminal output. Note: If you&rsquo;re having difficulty getting the nginx-proxy to run, try disabling any running nginx or apache services on your machine.</p>
+
+<p>With our nginx-proxy running successfully we can move on to running our WordPress project through Docker and giving it a virtual host name.</p>
+
+<h2 id="running-wordpress-with-docker">Running WordPress with Docker</h2>
+
+<p>To get our WordPress project running via Docker we need to do a couple of things:</p>
+
+<ol>
+<li>Add a <code>Dockerfile</code></li>
+<li>Add a <code>docker-compose.yml</code> file</li>
+<li>Add a development environment file (which we will name <code>.development.env</code>)</li>
+</ol>
+
+<p>Adding our Dockerfile is the easiest of these steps. For my WordPress sites I use the official WordPress Docker image, <a href="https://hub.docker.com/_/wordpress/">which you can find here</a>. If you&rsquo;re not sure which image version you should be using, just run with the <code>latest</code> tag. With that in mind, your <code>Dockerfile</code> should be looking something like this:</p>
+
+<pre><code>FROM wordpress:latest
+ADD . /var/www/html
+</code></pre>
+
+<p>The first line is telling Docker to run the latest version of the WordPress Docker image, while the second is telling Docker to mount the entire contents of our project into the <code>/var/www/html</code> folder inside our WordPress Docker container.</p>
+
+<p>Next up, we need to create a <code>docker-compose.yml</code> file, as well as tell it a set of environment variables to load, which we&rsquo;re going to keep in a file called <code>.development.env</code>.</p>
+
+<p>Create your <code>docker-compose.yml</code> file as follows:</p>
+
+<pre><code>web:
+  build: .
+  ports:
+    - &quot;8080:80&quot;
+  links:
+    - db
+  env_file: .development.env
+  volumes:
+    - .:/var/www/html
+db:
+  image: mysql:5.6
+  ports:
+   - &quot;9090:3306&quot;
+  environment:
+    - MYSQL_ROOT_PASSWORD=SOMEPASSWORD
+    - MYSQL_DATABASE=SOMEDATABASENAME
+  volumes:
+    - ./data/mysql/myprojectname:/var/lib/mysql
+</code></pre>
+
+<p>And in our <code>.development.env</code> file:</p>
+
+<pre><code>VIRTUAL_HOST=myproject1.test
+
+# WP DB
+DB_NAME=SOMEDATABASENAME
+DB_USER=SOMEDBUSER
+DB_PASSWORD=SOMEPASSWORD
+DB_HOST=db:3306
+</code></pre>
+
+<p>Together these two files will allow us to run a mysql Docker container along side our WordPress container, and link the two together.</p>
+
+<p>In our <code>.development.env</code> file we&rsquo;ve set a couple of values. First the VIRTUAL_HOST value is going to allow us to visit the Docker container at the web address myproject1.test. Next, the set of <code>DB_</code> values are going to allow us to tell our WordPress site how to connect to our mysql instance.</p>
+
+<p>Going back to our <code>docker-compose.yml</code> file, we can see that we use the same mysql password and username as specified in our <code>.development.env</code> file. These values are the ones that will be used to set up mysql Docker instance when the container starts.</p>
+
+<p>We can now proceed to edit our <code>wp-config.php</code> file to use our new environment variables. Modify the <code>wp-config.php</code> file as follows:</p>
+
+<pre><code class="language-php">$DB_NAME = getenv('DB_NAME') == false ?  '' : getenv('DB_NAME');
+$DB_USER = getenv('DB_USER') == false ? '' : getenv('DB_USER');
+$DB_PASSWORD = getenv('DB_PASSWORD') == false ? '' : getenv('DB_PASSWORD');
+$DB_HOST = getenv('DB_HOST') == false ? '' : getenv('DB_HOST');
+
+define('DB_NAME', $DB_NAME);
+
+/** MySQL database username */
+define('DB_USER', $DB_USER);
+
+/** MySQL database password */
+define('DB_PASSWORD', $DB_PASSWORD);
+
+/** MySQL hostname */
+define('DB_HOST', $DB_HOST);
+</code></pre>
+
+<p>With with WordPress now reading our environment variables, we can start our two containers simultaneously using the following command:</p>
+
+<pre><code class="language-shell">$ docker-compose up
+</code></pre>
+
+<p>Note: If you make any changes to your <code>Dockerfile</code> or <code>docker-compose.yml</code> file, pass through the <code>--build</code> flag when running the above command to make sure your new changes are included in the build.</p>
+
+<p>If you command was successful you should see Docker begin to start up the WordPress and mysql Docker containers. Once both are set up you should also be able to see the access and error logs output from the WordPress container.</p>
+
+<p>You might also feel like running the <code>docker ps</code> command in another terminal window, just to verify the steps we&rsquo;ve taken. You should be able to see our three containers - wordpress, nginx-proxy and mysql all running.</p>
+
+<h2 id="editing-our-hosts-file">Editing our Hosts file</h2>
+
+<p>The final change required to get our virtual host name working correctly is to edit the hosts file on our computer, located at <code>/etc/hosts</code>. To modify this file run the following command:</p>
+
+<pre><code class="language-shell">$ sudo vim /etc/hosts
+</code></pre>
+
+<p>Once in our vim view, add in a new entry at the end of the file. You&rsquo;ll want to use the same IP address as the one that appears at the top of the file, followed by the hostname you specified in you <code>.development.env</code> file. It should look something like as follows:</p>
+
+<pre><code>127.0.0.1   myhostname1.test
+</code></pre>
+
+<p>With that change made you should now be able to exit vim and visit our custom domain in our browser.</p>
+
+<p>If everything worked correctly you should be able to see the Welcome screen for our wordpress project. Happy developing!</p>
+
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/webdev/rails-getting-started-with-ajax-forms/" class="left arrow">&#8592; Previous</a>
+
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2019-01-01 18:16:38.242741 &#43;1100 AEDT m=&#43;0.101399546">2019</time> Sean Gilmore
+			</span>
+		</footer>
+
+    </body>
+</html>

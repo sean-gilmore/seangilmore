@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//seangilmore.xyz/webdev/wordpress-with-docker-and-nginx-proxy/</loc>
+    <lastmod>2018-12-30T10:41:05+11:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//seangilmore.xyz/webdev/rails-getting-started-with-ajax-forms/</loc>
     <lastmod>2018-10-30T17:16:45+00:00</lastmod>
   </url>
@@ -29,7 +34,7 @@
   
   <url>
     <loc>//seangilmore.xyz/</loc>
-    <lastmod>2018-10-30T17:16:45+00:00</lastmod>
+    <lastmod>2018-12-30T10:41:05+11:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -40,7 +45,7 @@
   
   <url>
     <loc>//seangilmore.xyz/webdev/</loc>
-    <lastmod>2018-10-30T17:16:45+00:00</lastmod>
+    <lastmod>2018-12-30T10:41:05+11:00</lastmod>
     <priority>0</priority>
   </url>
   
