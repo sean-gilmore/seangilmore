@@ -6,7 +6,7 @@ draft: false
 
 Hello World! This is the first blog on my new website.
 
-This site it built using [Hugo](https://gohugo.io/) the static site generator, using a modified version of the [Tale](https://github.com/EmielH/tale-hugo) theme.
+This site is built using [Hugo](https://gohugo.io/) the static site generator, using a modified version of the [Tale](https://github.com/EmielH/tale-hugo) theme.
 
 <!--more--> 
 
