@@ -1,7 +1,7 @@
 +++
 date = "2018-10-30T17:16:45+00:00"
 draft = false
-title = "Rails: Getting started with Ajax forms"
+title = "Rails 🚆: Getting started with Ajax forms"
 +++
 
 Rails Ajax form submission is a topic that is widely covered, but I'm yet to find a resource that deals with how to set up a completely custom implementation, from form submission to controller action, through to returning some response via Javascript and updating the page view dynamically.

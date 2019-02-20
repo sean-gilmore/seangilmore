@@ -1,5 +1,5 @@
 ---
-title: "Structuring CSS or: How I Learned to Stop Worrying and Love the BEM"
+title: "Structuring CSS or: How I Learned to Stop Worrying and Love the BEM 💣"
 date: 2019-02-20T22:03:35+11:00
 draft: true
 ---
