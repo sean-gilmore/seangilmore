@@ -8,7 +8,6 @@ For a while now I've spent a fair bit of time thinking about (and writing) CSS. 
 
 <!--more-->
 
-This problem gets even harder when you start throwing scss into the mix (yes, scss can make things worse in some ways) and you have multiple developers all with different ideas about how styles should organised, and trying to change and add styles without breaking things unknowingly. In a long running project all of these factors can add up and produce some nasty, hard to unwind tangles of very fragile styles that no one wants to touch.
-
+This problem is caused by lots of factors and crops up the most when working on large projects over long periods of time with lots of developers contributing to the stylesheets. 
 
 <!-- Insert pic of equation of stylesheet complexity over time -->
