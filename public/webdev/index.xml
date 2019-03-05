@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Webdevs on Sean Gilmore</title>
-    <link>//seangilmore.xyz/webdev/</link>
+    <link>https://seangilmore.dev/webdev/</link>
     <description>Recent content in Webdevs on Sean Gilmore</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 30 Dec 2018 10:41:05 +1100</lastBuildDate>
     
-	<atom:link href="//seangilmore.xyz/webdev/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://seangilmore.dev/webdev/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>WordPress with Docker and nginx-proxy</title>
-      <link>//seangilmore.xyz/webdev/wordpress-with-docker-and-nginx-proxy/</link>
+      <link>https://seangilmore.dev/webdev/wordpress-with-docker-and-nginx-proxy/</link>
       <pubDate>Sun, 30 Dec 2018 10:41:05 +1100</pubDate>
       
-      <guid>//seangilmore.xyz/webdev/wordpress-with-docker-and-nginx-proxy/</guid>
+      <guid>https://seangilmore.dev/webdev/wordpress-with-docker-and-nginx-proxy/</guid>
       <description>This article assumes you&amp;rsquo;re at least slightly familiar with Docker and Docker Compose. If you&amp;rsquo;re not sure of what Docker is, or you&amp;rsquo;d like to get started with Docker, I would check out the following links.
  Why Docker? Get Started with Docker  I am by no way a Docker expert, so if you see something in this article that you disagree with or you think could be improved upon, feel free to shoot me a tweet at @_sean_gilmore.</description>
     </item>
     
     <item>
       <title>Rails 🚆: Getting started with Ajax forms</title>
-      <link>//seangilmore.xyz/webdev/rails-getting-started-with-ajax-forms/</link>
+      <link>https://seangilmore.dev/webdev/rails-getting-started-with-ajax-forms/</link>
       <pubDate>Tue, 30 Oct 2018 17:16:45 +0000</pubDate>
       
-      <guid>//seangilmore.xyz/webdev/rails-getting-started-with-ajax-forms/</guid>
+      <guid>https://seangilmore.dev/webdev/rails-getting-started-with-ajax-forms/</guid>
       <description>&lt;p&gt;Rails Ajax form submission is a topic that is widely covered, but I&amp;rsquo;m yet to find a resource that deals with how to set up a completely custom implementation, from form submission to controller action, through to returning some response via Javascript and updating the page view dynamically.&lt;/p&gt;
 
 &lt;p&gt;When I was learning about ajax form submission, I put together this document to help myself in the future. The problem I was working on at the time was to create a &amp;lsquo;hand raisers&amp;rsquo; form that would submit and update with a response from the server if the submission had been successful, or if it had issues.&lt;/p&gt;
