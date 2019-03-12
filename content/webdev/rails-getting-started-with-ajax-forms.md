@@ -17,7 +17,7 @@ Heres the gist:
 ## Remote: true
 
 `remote: true` and `method: :post` should be added to your form.
-Adding this `remote: true` settings will tell ruby to submit the form via ajax, and render the associated methods js file in response to the request.
+Adding the `remote: true` setting will tell ruby to submit the form via ajax, and render the associated methods Javascript file in response to the request.
 
 ```html
  <%= form_tag form_path, method: :post, remote: true, class: 'contact-form', id: 'contact-form' do %>
@@ -40,7 +40,7 @@ You must have a controller and action that matches those specified in your `rout
 
 The code inside of this action is what will be called once the form is submitted.
 
-You should have all form validation and logic here.
+All validation and form logic should be contained thin this action.
 
 Variables that you wish to access later should be set here, using the `@variable_name` syntax.
 
