@@ -18,17 +18,25 @@ With that said, when you finally have the opportunity to either start a new proj
   - Follow a simple, logical structure
   - Avoid complex selectors
 - Easy to extend
-  - Without duplicating styles uncessarily
+  - Without duplicating styles unnecessarily
 - Easy to update
   - Avoiding breaking things by mistake
   - Can confidently modify or remove styles
 - Should be robust
   - Changing the html of the document should not unnecessarily break your styles
 
-This might seem like a tall order, but if we start of follow a couple of important rules when creating and updating our styles, we should be able to achive the above requirements in no time at all.
+This might seem like a tall order, but if we start of follow a couple of important rules when creating and updating our styles, we should be able to achieve the above requirements in no time at all.
 
 ## Using BEM
 
-## File Stucture
+BEM is a general framework for how you should name and structure your css/scss. The name itself stands for Block Element Modifier, and suggests structuring your class names around the block of content they encapsulate, the elements within the block, and then any modifier properties that otherwise alter the default element style.
 
-## Mixins and Varaibles
+Take the example of building a calendar component - at the top level of your calendar you might have a div with the class of `calendar`.
+
+<iframe src="https://codepen.io/SeanG7/pen/gOORjPb"></iframe>
+
+Within that div you might have multiple divs representing each week, which you would give the class of `calendar__week`. Within each week you would have a div for each day, with the class of `calendar__day` applied.
+
+## File Structure using 7-1
+
+## Mixins and Variables
