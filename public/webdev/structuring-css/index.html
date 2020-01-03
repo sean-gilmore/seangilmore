@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en-us">
+    <head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+		<title>
+				Structuring CSS &middot; Sean Gilmore
+		</title>
+	
+		
+		<link rel="stylesheet" href="/css/style.css">
+		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400i,700">
+	
+		
+		<link rel="icon" type="image/png" sizes="32x32" href="https://seangilmore.dev/images/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="https://seangilmore.dev/images/favicon-16x16.png">
+		<link rel="apple-touch-icon" sizes="180x180" href="https://seangilmore.dev/images/apple-touch-icon.png">
+		<link rel="stylesheet"
+      href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/styles/default.min.css">
+		<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.13.1/highlight.min.js"></script>
+		<script>hljs.initHighlightingOnLoad();</script>
+		
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133724861-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-133724861-1');
+		</script>
+
+	
+		
+		<link href="" rel="alternate" type="application/rss+xml" title="Sean Gilmore" />
+	</head>
+	
+    <body>
+        		<nav class="nav">
+			<div class="nav-container">
+				<a href="/">
+					<h2 class="nav-title">Sean Gilmore</h2>
+				</a>
+				<ul class="header-nav">
+    
+      <li class="header-nav__link"><a href="https://seangilmore.dev/webdev/">Webdev</a></li>
+    
+      <li class="header-nav__link"><a href="https://seangilmore.dev/blog/">Blog</a></li>
+    
+      <li class="header-nav__link"><a href="https://seangilmore.dev/about/">About</a></li>
+    
+</ul>
+			</div>
+		</nav>
+
+        
+
+<main>
+	<div class="post">
+		<div class="post-info">
+        <br>
+        <time datetime="2020-01-03 10:41:05 &#43;1100 AEDT">January 3, 2020</time>
+</div>
+		<h1 class="post-title">Structuring CSS</h1>
+<div class="post-line"></div>
+
+		
+
+		<p>For a while now I&rsquo;ve spent a fair bit of time thinking about (and writing) CSS. Writing CSS is one of those tasks I love - getting that instant visual feedback and knowing that you&rsquo;ve managed to put together a website that is now not only functional but also beautiful and engaging is a really rewarding experience. It&rsquo;s also fun from the standpoint of taking someones design and being the one to bring it to life - like building with lego or putting together flat-pack furniture. But despite all the fun, CSS can quickly become a chore, especially when you&rsquo;re dealing with messy, un-organised and fragile CSS.</p>
+
+<p>This problem is caused by lots of factors and crops up the most when working on large projects over long periods of time with lots of developers contributing to the stylesheets. Deeply nested SASS selectors and un-decipherable class names can create a situation where it&rsquo;s easier for developers to just keep adding to the growing pile of styles, rather than make sensible changes that improve the overall CSS code base.</p>
+
+<p>This poor practice leads to an ever growing pile of more and more complex and specific selectors (with plenty of <code>!important's</code> sprinkled on top), and it&rsquo;s a problem that won&rsquo;t go away easily.</p>
+
+<p>With that said, when you finally have the opportunity to either start a new project, or get some much needed time to refactor your CSS, it&rsquo;s good to go into the the process with an idea of how you want your styles to be structured. I&rsquo;ve come up with a few criteria that I think are important when writing well structured and easily maintainable CSS.</p>
+
+<p>Your CSS should be:</p>
+
+<ul>
+<li>Easy to understand
+
+<ul>
+<li>Follow a simple, logical, familiar structure</li>
+<li>Avoid complex selectors</li>
+</ul></li>
+<li>Easy to extend
+
+<ul>
+<li>Without duplicating styles unnecessarily</li>
+<li>Without introducing complexity</li>
+</ul></li>
+<li>Easy to update
+
+<ul>
+<li>Avoid breaking things by mistake</li>
+<li>Can confidently modify or remove styles</li>
+</ul></li>
+<li>Should be robust
+
+<ul>
+<li>Changing the HTML of the document should not break your styles</li>
+</ul></li>
+</ul>
+
+<p>This might seem like a tall order, but I believe we can achieve all of the above and write CSS that is a joy to work with.</p>
+
+<h2 id="using-bem">Using BEM</h2>
+
+<p><a href="http://getbem.com/introduction/">BEM</a> is a general framework for how you should name and structure your css/scss. The name itself stands for Block Element Modifier, and suggests structuring your class names around the block of content they encapsulate, the elements within the block, and then any modifier properties that otherwise alter the default element style.</p>
+
+<p>Take the example of building a calendar component - at the top level of your calendar you might have a <code>&lt;div&gt;</code> with the class of <code>calendar</code>.</p>
+
+<iframe width="100%" height="400px" class="iframe" src="https://codepen.io/SeanG7/pen/gOORjPb"></iframe>
+
+<p>Within the <code>calendar</code> block, you might have multiple elements - <code>calendar__header</code> for the cells at the top of the calendar, <code>calendar__today</code> for the current day, and <code>calendar__next-month</code> for the days that fall outside of the current month.</p>
+
+<p>Following this pattern has resulted in us logically isolating our styles according to the elements in our component, with no side-effects on our styles because of the HTML structure of our document. We&rsquo;ve also implemented a pattern that will be consistent across all the styles we create.</p>
+
+<p>The benefit of this is that we will now be able to remove, or modify any of our styles, or restructure or remove HTML elements, without having to worry about unintended consequences. If we keep this structure consistent across all the styles we create, we&rsquo;re also going to find it very easy to jump back into any of our styles and quickly understand what they are trying to achieve.</p>
+
+<h2 id="file-structure-using-7-1">File Structure using 7-1</h2>
+
+<p>The choice for how you structure your files comes down to personal preference. For myself, I&rsquo;m a big fan of the <a href="https://sass-guidelin.es/#the-7-1-pattern">7 - 1 Pattern</a>, as defined by <a href="https://hugogiraudel.com/">Hugo Giraudel</a>. Hugo does a great job of splitting out styles that should be generically applied across your site, versus those styles that apply specifically to certain components or elements. One of my biggest suggestions when picking/implementing a file structure, is that you attempt to split all of your BEM blocks into the separate files. This is easiest done when you approach each BEM block as a component, and you&rsquo;re already trying to logically separate your styles into discrete, reusable blocks.</p>
+
+<p>Whatever file structure you do pick, should be used across all of your projects - increasing consistency and allowing developers to feel at home, no matter what project they&rsquo;re working in.</p>
+
+<h2 id="mixins">Mixins</h2>
+
+<p>Mixins are your main weapon when dealing with code duplication and improving re-use. When approaching two BEM classes that share a lot&rsquo;s of the styles, the best thing to do is to refactor those styles out into a mixin.</p>
+
+<p>Take the following example:</p>
+
+<pre><code class="language-scss">.button {
+  background-color: $blue;
+  border-radius: 5px;
+  color: $white;
+
+  &amp;:hover {
+    color: $black;
+  }
+}
+
+.form__submit {
+  background-color: $blue;
+  border-radius: 5px;
+  color: $white;
+
+  &amp;:hover {
+    color: $green;
+  }
+}
+</code></pre>
+
+<p>We can easily refactor styles styles into a mixin, as shown:</p>
+
+<pre><code class="language-scss">@button {
+  background-color: blue;
+  border-radius: 5px;
+  color: white;
+}
+
+.button {
+  @include button;
+
+  &amp;:hover {
+    color: black;
+  }
+}
+
+.form__submit {
+  @include button;
+
+  &amp;:hover {
+    color: green;
+  }
+}
+
+</code></pre>
+
+<p>This gives us a clear base button style in the <code>@button</code> mixin, which we can then apply to the specific BEM class instances. This also gives us the ability to override any of the base <code>@button</code> styles, without affecting the any of the elements the <code>@button</code> is applied to.</p>
+
+<h2 id="variables">Variables</h2>
+
+<p>Variables are a big part of SCSS, but one that I think is often underutilized. You should approach the use of variables from the perspective of trying to build a &ldquo;design language&rdquo;. Creating variables from the following values is a great starting point:</p>
+
+<ul>
+<li>Break points</li>
+<li>Colours</li>
+<li>Font families</li>
+<li>Font sizes</li>
+</ul>
+
+<p>Once you have these values defined, it&rsquo;s very easy to start including them in the rest of your SCSS. The end result will be a more consistent code base, with the added advantage of being able to make consistent changes across multiple elements, simply by tweaking any of your variable values.</p>
+
+<p>An additional idea that I&rsquo;ve been idea for a set of variables that I&rsquo;ve been playing around with is to do with paddings and margins:</p>
+
+<pre><code class="language-scss">$padding-xl: 75px;
+$padding-lg: 60px;
+$padding-md: 45px;
+$padding-sm: 30px;
+$padding-xs: 15px;
+</code></pre>
+
+<p>Having a defined set of paddings or margins can help take away some of the inconsistencies in the end product (one element has margin/padding that does not match up with the surrounding elements) and help when deciding how an element should be styled.</p>
+
+<h2 id="in-closing">In closing</h2>
+
+<p>CSS is a tricky thing to get right. While I think I&rsquo;ve found really good solutions to a lot of the common problems I&rsquo;ve found with it, your mileage may vary. If you think you have a better approach to writing and structuring CSS, by all means stick with it. If you do have any suggestions, or comments about my approach, please reach out and let me know - I&rsquo;d love to have some feedback. Thanks for reading, and I hope you enjoy writing your CSS 😄.</p>
+
+		
+	</div>
+
+	<div class="pagination">
+		<a href="/webdev/wordpress-with-docker-and-nginx-proxy/" class="right arrow">Next &#8594;</a>
+
+	</div>
+</main>
+
+
+        		<footer>
+			<span>
+			&copy; <time datetime="2020-01-03 21:11:52.048985 &#43;1100 AEDT m=&#43;0.092556410">2020</time> Sean Gilmore
+			</span>
+		</footer>
+
+    </body>
+</html>
