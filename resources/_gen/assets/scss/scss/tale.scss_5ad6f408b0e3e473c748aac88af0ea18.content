@@ -12,11 +12,8 @@ body {
 
 html {
   font-family: "Helvetica Neue", "Segoe UI", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 18px;
   overflow-y: scroll; }
-  @media (min-width: 600px) {
-    html {
-      font-size: 16px; } }
 
 body {
   -webkit-text-size-adjust: 100%; }
@@ -92,7 +89,9 @@ pre code {
     user-select: none; }
 
 .post {
-  padding: 3rem 0; }
+  padding: 3rem 0;
+  max-width: 700px;
+  margin: 0 auto; }
   .post-info {
     color: #aaa;
     font-family: Palatino, "Palatino LT STD", "Palatino Linotype", "Book Antiqua", "Georgia", serif;
@@ -112,8 +111,7 @@ pre code {
     margin: 0 auto 3rem;
     width: 4rem; }
   .post p {
-    margin: 0 0 1rem;
-    text-align: justify; }
+    margin: 0 0 1rem; }
   .post a:hover {
     text-decoration: underline; }
   .post img {
@@ -539,5 +537,10 @@ footer {
 
 .nav-title:hover {
   opacity: 1 !important; }
+
+.iframe {
+  border: none;
+  margin: 1.1rem 0;
+  display: block; }
 
 /*# sourceMappingURL=style.css.map */
