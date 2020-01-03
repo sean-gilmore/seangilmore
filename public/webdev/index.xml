@@ -31,9 +31,7 @@
 
 &lt;p&gt;When I was learning about ajax form submission, I put together this document to help myself in the future. The problem I was working on at the time was to create a &amp;lsquo;hand raisers&amp;rsquo; form that would submit and update with a response from the server if the submission had been successful, or if it had issues.&lt;/p&gt;
 
-&lt;p&gt;I hope you too can get some use from it.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;I hope you too can get some use from it.&lt;/p&gt;</description>
     </item>
     
   </channel>

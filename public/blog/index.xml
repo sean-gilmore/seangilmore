@@ -19,9 +19,7 @@
       <guid>https://seangilmore.dev/blog/hello-world/</guid>
       <description>&lt;p&gt;Hello World! This is the first blog on my new website.&lt;/p&gt;
 
-&lt;p&gt;This site is built using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; the static site generator, using a modified version of the &lt;a href=&#34;https://github.com/EmielH/tale-hugo&#34;&gt;Tale&lt;/a&gt; theme.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+&lt;p&gt;This site is built using &lt;a href=&#34;https://gohugo.io/&#34;&gt;Hugo&lt;/a&gt; the static site generator, using a modified version of the &lt;a href=&#34;https://github.com/EmielH/tale-hugo&#34;&gt;Tale&lt;/a&gt; theme.&lt;/p&gt;</description>
     </item>
     
   </channel>
