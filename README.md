@@ -1,15 +1,12 @@
-# seangilmore.xyz
+# seangilmore
 
 My personal website.
 
 ## Dependencies
 
-Install hugo
+- node:16.14.0
 
-## Running the application
+## Local setup
 
-Run `hugo server` to start a dev server.
-
-Run `hugo build` to build the production application
-
-
+- npm install
+- npm run start
