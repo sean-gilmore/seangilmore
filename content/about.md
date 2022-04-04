@@ -1,6 +1,6 @@
 ---
 title: "About"
-layout: test.njk
+layout: main.njk
 ---
 
 Currently working as a web developer for [Arcadian Digital](//arcadiandigital.com.au/) in Melbourne, Australia.
